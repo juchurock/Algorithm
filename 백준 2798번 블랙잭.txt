@@ -1,0 +1,20 @@
+#순열보단 조합으로
+from itertools import combinations
+
+#N과 M을 입력값으로 놓고
+N, M = map(int, input().split())
+N_array = list(map(int,input().split()))
+#출력감을 초기화
+result = 0
+#조합으로 만든 3장의 카드리스트 모음
+c_arrays=list(combinations(N_array,3))
+
+#카드리스트 모음 중 카드리스트 선택
+for c_array in c_arrays:
+  #카드리스트의 합 구하기
+  card_sum = sum(c_array)
+  #합이 결과값보다 크고 M보다 작아야함
+  if result<card_sum <= M:
+    #그럼 결과값이 카드의 합이됨.
+    result = card_sum
+print(result)
