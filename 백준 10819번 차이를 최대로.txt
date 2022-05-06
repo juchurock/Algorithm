@@ -1,21 +1,21 @@
-import itertools
-
+#순열 모듈을 꺼내고 문제의 입력값을 넣는다
+from itertools import permutations
 N = int(input())
+A = list(map(int, input().split()))
 
-input_array = list(map(int, input().split()))
-result = 0 #결과 값을 저장할 result 값 선언
+#입력값의 모든 경우의수 리스트를 만들고 결과값을 초기화한다
+list_pers = list(permutations(A))
+result = 0
 
-
-def result_solve(array):  # 리스트의 차를 구하는 공식
-    global result
-
-    def_result = 0 #각 원소의 차를 저장
-    for i in range(len(array) - 1):
-        def_result += abs(array[i] - array[i + 1]) #각 원소의 차의 절대값을 계속해서 더해나간다.
-    result = max(result, def_result) #저장되어있는 결과값과 비교해서 큰 값을 결과값에 대입
-
-
-for i in itertools.permutations(input_array, N): #permutations라이브러리 이용(입력받은 리스트의 원소중에서 N개를 뽑는다.)
-    result_solve(i) #뽑은 순열마다 리스트의 차를 구하여 result에 대입
+#리스트 경우의 수에서 리스트를 뽑아내고 차의 절대값의 합을 초기화한다
+for list_per in list_pers:
+  sum = 0
+  #한 리스트에서 리스트 순서를 뽑아내고
+  for i in range(len(list_per)-1):
+    #차이의 절대값을 모두 더한다.
+     sum += abs(list_per[i]-list_per[i+1])
+    #이것을 결과값 즉 각 리스트의 절대값값과 비교하여 가장 큰것이 나올때까지 돌린다. 
+  if sum > result:
+    result=sum
 
 print(result)
